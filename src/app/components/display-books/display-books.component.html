@@ -1,0 +1,106 @@
+
+<div
+  class="main-div"
+  fxLayoutGap="40px"
+  fxLayout.lt-sm="column"
+  fxLayout.sm="row wrap"
+  fxLayoutAlign.sm="start center"
+  fxLayout.md="row wrap"
+  fxLayoutAlign.md="start center"
+  fxLayoutAlign.lt-sm="center center"
+  fxLayout.lg="row wrap"
+  fxLayoutAlign.lg="start start"
+>
+  <div *ngFor="let book of books  | bookFilter:searchTerm" style="margin: 0px; " fxLayout="row">
+    <mat-card>
+
+     <div class="bookImageDiv" fxLayoutAlign="center">
+        <img src="{{ book.bookImgUrl }}" />
+      </div>
+
+      <div class="bookInfoDiv" fxLayout="column">
+        <div class="input-title">
+          {{ book.bookName }}
+        </div>
+        <div fxlayout="row" class="input-author">by {{ book.authorName }}</div>
+        <div fxlayout="row" (click)="onUpdateBookForm(book)">
+          <span class="input-price-span">Rs. {{ book.price }}</span>
+        </div>
+
+<!--        button        -->
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button
+            class="delete-button"
+            mat-raised-button
+            fxLayoutAlign="center"
+            [disableRipple]="true"
+            (click)="onDeleteBook(book.bookId)"
+          >
+            DELETE
+          </button>
+          <button
+            class="update-button"
+            mat-raised-button
+            fxLayoutAlign="center"
+            [disableRipple]="true"
+            (click)="onUpdateBookForm(book)"
+          >
+            UPDATE
+          </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button
+            style="
+          height: 32px;
+          width: 100%;
+          margin-top: 8px;
+          background-color: #a03037;
+          border-radius: 2px;
+          color: whitesmoke;
+          text-align: center;"
+
+            mat-raised-button
+            fxLayoutAlign="center"
+            [disableRipple]="true"
+            (click)="applyForApproval(book.bookId)"
+          >
+            Request For Approval
+          </button>
+        </div>
+<!--        disapproved -->
+        <div *ngIf="book.disapproved === true">
+          <div style="
+          height: 32px;
+          width: 100%;
+          margin-top: -250px;
+          background-color: darkred;
+          border-radius: 2px;
+          color:white;
+          text-align: center;
+          opacity: 90%;
+        ">
+            DISAPPROVED
+          </div>
+        </div>
+        <div *ngIf="book.verfied === true">
+          <div style="
+          height: 32px;
+          width: 100%;
+          margin-top: -250px;
+          background-color: darkgreen;
+          border-radius: 2px;
+          color:white;
+          text-align: center;
+          opacity: 90%;
+        ">
+            VERIFIED
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <div class="book-details">
+      <h4 style="text-align: center;margin-top: 0mm;">Book Details</h4>
+      <span style="font-size: medium;">{{ book.bookDetails }}</span>
+    </div>
+  </div>
+</div>

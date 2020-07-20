@@ -1,0 +1,57 @@
+<!--<div-->
+<!--  class="main-div"-->
+<!--  fxLayoutGap="40px"-->
+<!--  fxLayout.lt-sm="column"-->
+<!--  fxLayout.sm="row wrap"-->
+<!--  fxLayoutAlign.sm="start center"-->
+<!--  fxLayout.md="row wrap"-->
+<!--  fxLayoutAlign.md="start center"-->
+<!--  fxLayoutAlign.lt-sm="center center"-->
+<!--  fxLayout.lg="row wrap"-->
+<!--  fxLayoutAlign.lg="start start"-->
+<!--&gt;-->
+<!--  <div *ngFor="let book of books" style="margin: 0px; " fxLayout="row">-->
+<!--    <mat-card>-->
+<!--     -->
+<!--     <div class="bookImageDiv" fxLayoutAlign="center">-->
+<!--        <img src="{{ book.bookImgUrl }}" />-->
+<!--        -->
+<!--      </div>-->
+
+<!--      <div class="bookInfoDiv" fxLayout="column">-->
+<!--        <div class="input-title">-->
+<!--          {{ book.bookName }}-->
+<!--        </div>-->
+<!--        <div fxlayout="row" class="input-author">by {{ book.authorName }}</div>-->
+<!--        <div fxlayout="row">-->
+<!--          <span class="input-price-span">Rs. {{ book.price }}</span>-->
+<!--        </div>-->
+<!--        <div fxLayout="row" fxLayoutAlign="space-between">-->
+<!--          <button-->
+<!--            class="approval-button"-->
+<!--            mat-raised-button-->
+<!--            fxLayoutAlign="center"-->
+<!--            [disableRipple]="true"-->
+<!--            (click)="onWish(book.bookId)"-->
+<!--          >-->
+<!--            Wish list-->
+<!--          </button>-->
+<!--          <button-->
+<!--            class="add-button"-->
+<!--            mat-raised-button-->
+<!--            fxLayoutAlign="center"-->
+<!--            [disableRipple]="true"-->
+<!--            (click)="onAdd(book.bookId)"-->
+<!--          >-->
+<!--            Add to cart-->
+<!--          </button>-->
+<!--  -->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </mat-card>-->
+<!--    <div class="book-details">-->
+<!--      <h4>Book Details</h4>-->
+<!--      <span class="input-price">{{ book.bookDetails }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

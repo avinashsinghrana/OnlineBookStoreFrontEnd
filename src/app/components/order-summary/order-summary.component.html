@@ -1,0 +1,276 @@
+<mat-toolbar style="width: 98.8%; height: 8%;" fxLayout="row" fxLayoutAlign="space-between center">
+  <!--------------- booking and book --------------------------->
+  <div class="titleText" fxLayoutGap="3%">
+    <img src="../../../assets/image/education.svg"/>
+    <a
+      href="http://localhost:4200/dashboard/books"
+      style="color: white;text-decoration: none;"
+    >BookStore</a>
+  </div>
+  <!-------------------- search ------------------->
+  <mat-card class="search-mat-card" fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-icon-button [disableRipple]="true" matTooltip="search">
+      <mat-icon class="searchIcon">search</mat-icon>
+    </button>
+    <input class="searchInput" type="text" placeholder="Search..."/>
+  </mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="start end" style="margin-right: 10%;">
+    <button class="cart" mat-icon-button matTooltip="Cart">
+      Cart
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <br/>
+  </div>
+</mat-toolbar>
+<!-- </div> -->
+<mat-card class="place-book">
+  <p>My cart({{size}})</p>
+
+  <div *ngFor="let book of books; let i = index">
+    <mat-card>
+      <mat-card-title>
+        <img src="{{ book.bookImgUrl }}"
+             style="
+             height: 111px;
+            width: 89px;
+            margin-left: 21px;
+            margin-right: 55px;
+            padding-top: 2px;
+            padding-bottom: 21px;
+          "/>
+      </mat-card-title>
+
+      <mat-card-content class="mat-content">
+        <div>
+          <p class="book-names">{{ book.bookName | uppercase }} </p>
+          <p class="book-names1">{{ book.authorName }}</p>
+          <p class="book-names2">Rs.{{ book.price }}</p>
+        </div>
+        <div class="quantity">
+          <button
+            mat-icon-button
+            (click)="decreaseQuantity(book.bookId, i)"
+            [disabled]="getQuantitiy(i) "
+          >
+            <mat-icon class="material-icons-outlined"
+            >remove_circle_outline
+            </mat-icon
+            >
+          </button>
+          <input
+            type="text"
+            class="quantity-holder"
+            [(ngModel)]="book.quantity"
+          />
+          <button mat-icon-button (click)="increaseQuantity(book.bookId, i)">
+            <mat-icon class="material-icons-outlined"
+            >add_circle_outline
+            </mat-icon
+            >
+          </button>
+          <button
+            mat-flat-button
+            class="remove-button"
+            (click)="removeAllItemsCart(book.bookId)"
+          >
+            Remove
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- end -->
+  <button
+    flex
+    mat-flat-button
+    color="primary"
+    class="placeOrder"
+    *ngIf="!popup"
+    (click)="onPopup()"
+    [disabled]=" (size) === 0 "
+  >
+    PLACE ORDER
+  </button>
+</mat-card>
+
+<mat-card *ngIf="!popup" class="mat-details">
+  Customer Details
+</mat-card>
+
+<mat-card flex *ngIf="popup" class="contact-details"
+>Customer Details
+  <form [formGroup]="registerForm">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="fullName" required/>
+            <mat-error *ngIf="registerForm.hasError('required', ['fullName'])">
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>PhoneNumber</mat-label>
+            <input matInput formControlName="phoneNumber" required/>
+            <mat-error
+              *ngIf="registerForm.hasError('required', ['phoneNumber'])"
+            >
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Pincode</mat-label>
+            <input matInput formControlName="pinCode" required/>
+            <mat-error *ngIf="registerForm.hasError('required', ['pinCode'])">
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Locality</mat-label>
+            <input matInput formControlName="locality" required/>
+            <mat-error *ngIf="registerForm.hasError('required', ['locality'])">
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <mat-form-field class="example-full-Address" appearance="outline">
+        <mat-label>Address</mat-label>
+        <textarea
+          matInput
+          placeholder="Ex. 100 Main St"
+          formControlName="address"
+          required
+        ></textarea>
+        <mat-error *ngIf="registerForm.hasError('required', ['address'])">
+          Field must not be Empty
+        </mat-error
+        >
+      </mat-form-field>
+    </p>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>City</mat-label>
+            <input
+              matInput
+              placeholder="Ex. San Francisco"
+              formControlName="city"
+              required
+            />
+            <mat-error *ngIf="registerForm.hasError('required', ['city'])">
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Landmark</mat-label>
+            <input
+              matInput
+              placeholder="Ex. California"
+              formControlName="landMark"
+              required
+            />
+            <mat-error *ngIf="registerForm.hasError('required', ['landMark'])">
+              Field must not be Empty
+            </mat-error
+            >
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <!-- (change)="onChange($event)" -->
+  <label class="example-radio-group">Type</label>
+  <mat-radio-group
+    aria-label="Select an option"
+    fxLayoutGap="50px"
+    (change)="onChange($event)"
+  >
+    <mat-radio-button name="home" value="home" checked="true">Home</mat-radio-button>
+    <mat-radio-button name="work" value="work"> Work</mat-radio-button>
+    <mat-radio-button name="other" value="other">Other</mat-radio-button>
+  </mat-radio-group>
+
+  <button
+    mat-flat-button
+    color="primary"
+    class="Continue"
+    *ngIf="!press"
+    (click)="onPress()"
+  >
+    Continue
+  </button>
+</mat-card>
+<mat-card *ngIf="!press" class="Summary-details">
+  Order Summary
+</mat-card>
+
+<mat-card *ngIf="press" class="order-details"
+>Order Summary
+
+  <div *ngFor="let book of books">
+    <mat-card>
+      <mat-card-title matTooltip="Book Image"
+      ><img
+        src="{{ book.bookImgUrl }}"
+        style="
+            height: 105px;
+            width: 89px;
+            margin-left: 21px;
+            margin-right: 55px;
+            padding-top: 20px;
+            padding-bottom: 21px;
+          "
+      />
+      </mat-card-title>
+      <mat-card-content>
+        <div class="mat-content1">
+          <p class="book-names3">{{ book.bookName | uppercase}}</p>
+          <p class="book-names4">{{ book.authorName }}</p>
+          <p class="book-names5">Rs.{{ book.price }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    class="checkout"
+    (click)="checkout()"
+  >
+    Checkout
+  </button>
+</mat-card>
+
+<mat-card class="footer">
+  <div>
+    <p class="footerText">
+      Copyright © 2020, Bookstore Private Limited. All Rights Reserved
+    </p>
+  </div>
+</mat-card>

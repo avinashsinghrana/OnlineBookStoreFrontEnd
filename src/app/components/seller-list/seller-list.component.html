@@ -1,0 +1,64 @@
+<!--<div *ngIf="sellerLists.length == 0" style="alignment: center; margin-top: 10%">-->
+<!--  <h4 style="color: grey" align="center">Hello, {{ name }}</h4>-->
+<!--  <h1 align="center">-->
+<!--  No Request Found !!</h1>-->
+<!--</div>-->
+<div
+  class="main-div"
+  fxLayoutGap="40px"
+  fxLayout.lt-sm="column"
+  fxLayout.sm="row wrap"
+  fxLayoutAlign.sm="start center"
+  fxLayout.md="row wrap"
+  fxLayoutAlign.md="start center"
+  fxLayoutAlign.lt-sm="center center"
+  fxLayout.lg="row wrap"
+  fxLayoutAlign.lg="start start"
+>
+  <!--      | bookFilter:searchTerm" style="margin: 0px; "-->
+
+  <div *ngFor="let seller of sellerLists | paginate: { itemsPerPage: 4, currentPage: page, id: 'first' } ;let i = index"
+  style="margin: 0px; " fxLayout="row" >
+    <mat-card>
+      <div class="bookImageDiv" fxLayoutAlign="center">
+        <img src="{{ seller.profileUrl }}"/>
+      </div>
+
+      <div class="bookInfoDiv" fxLayout="column">
+        <div class="input-title">
+          Seller Name: {{ seller.fullName }}
+        </div>
+        <div fxlayout="row" class="input-sellerId">SellerId: {{ seller.userId }}</div>
+        <div fxlayout="row">
+          <span class="input-quant">No. of Request:  {{ seller.quantity }}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button
+            style="
+          height: 32px;
+          width: 100%;
+          margin-top: 8px;
+          background-color: darkred;
+          border-radius: 2px;
+          color: whitesmoke;
+          text-align: center;"
+
+            mat-raised-button
+            fxLayoutAlign="center"
+            [disableRipple]="true"
+            (click)="showList(seller.userId)"
+          >
+            See Book List
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div class="paginator">
+  <pagination-controls
+    (pageChange)="page = $event"
+    id="first"
+  ></pagination-controls>
+</div>
+

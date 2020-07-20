@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="title">
+    Books
+    <span style="font-size: 15px; color: rgb(139, 136, 136);"
+    >({{ books.length }} items)</span
+    >
+  </div>
+  <div style="width: 15%; height: 30%; border: 3px; padding: 2px;margin-right: 10%;">
+    <select [(ngModel)]='sortTerm' (ngModelChange)='onSelect($event)'>
+      <option value="none">sort by relevance</option>
+      <option value="Price:High To Low">Price:High To Low</option>
+      <option value="Price:Low To High">Price:Low To High</option>
+      <option value="By Book Name">By Book Name</option>
+    </select>
+  </div>
+</div>
+<div
+  class="main-div"
+  fxLayoutGap="40px"
+  fxLayout.lt-sm="column"
+  fxLayout.sm="row wrap"
+  fxLayoutAlign.sm="start center"
+  fxLayout.md="row wrap"
+  fxLayoutAlign.md="start center"
+  fxLayoutAlign.lt-sm="center center"
+  fxLayout.lg="row wrap"
+  fxLayoutAlign.lg="start start"
+>
+  <div
+    *ngFor="let book of books | bookFilter:searchTerm | sortbyprice:sortTerm | paginate: { itemsPerPage: 8, currentPage: page, id: 'first' } ;let i = index"
+    style="margin: 0px; " fxLayout="row">
+    <mat-card>
+
+      <!--      image of book -->
+      <div class="bookImageDiv" fxLayoutAlign="center">
+        <img src="{{ book.bookImgUrl }}"/>
+      </div>
+
+      <!--      book data-->
+      <div class="bookInfoDiv" fxLayout="column">
+        <div class="input-title">
+          {{ book.bookName }}
+        </div>
+        <div fxlayout="row" class="input-author">by {{ book.authorName }}</div>
+        <div fxlayout="row">
+          <span class="input-price-span">Rs. {{ book.price }}</span>
+        </div>
+
+        <!--        button        -->
+
+        <div *ngIf="valueCheck(i, book.bookId) != book.bookId" fxLayout="row" fxLayoutAlign="space-between">
+          <button class="delete-button"
+                  mat-raised-button fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
+            Add to cart
+          </button>
+          <div>
+            <button class="WishToCart-button"
+              *ngIf="wishCheck(i, book.bookId) != book.bookId "
+              class="update-button"
+              mat-raised-button
+              fxLayoutAlign="center"
+              [disableRipple]="true"
+              (click)="onWish(book.bookId)">
+              Add to WL
+            </button>
+          </div>
+          <div>
+            <button
+              *ngIf="wishCheck(i, book.bookId) === book.bookId"
+              class="update-button"
+              mat-raised-button
+              fxLayoutAlign="center"
+              [disableRipple]="true"
+              [disabled]="wishCheck(i, book.bookId) === book.bookId"
+              (click)="onWish(book)">
+              Added To WL
+            </button>
+          </div>
+        </div>
+        <div *ngIf="valueCheck(i, book.bookId) == book.bookId || book.quantity <= 0">
+          <button
+            style="
+          height: 32px;
+          width: 100%;
+          background-color: #3371b5;
+          border-radius: 2px;
+          color: whitesmoke;
+          text-align: center;"
+            mat-button
+                  [disabled]="valueCheck(i, book.bookId) == book.bookId" class="delete-button" mat-raised-button
+                  fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
+            Added to cart
+          </button>
+        </div>
+
+        <!--        out of stock -->
+        <div *ngIf="book.quantity <= 0">
+          <div style="
+          height: 32px;
+          width: 100%;
+          margin-top: -200px;
+          background-color: white;
+          border-radius: 2px;
+          color:black;
+          text-align: center;
+          opacity: 90%;
+        ">
+            Out Of Stock
+          </div>
+        </div>
+
+      </div>
+    </mat-card>
+
+
+    <!--    book details -->
+    <div class="book-details">
+      <h4 style="text-align: center;margin-top: 0mm;">Book Details</h4>
+      <span style="font-size: medium;">{{ book.bookDetails }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="paginator">
+  <pagination-controls
+    (pageChange)="page = $event"
+    id="first"
+  ></pagination-controls>
+</div>
