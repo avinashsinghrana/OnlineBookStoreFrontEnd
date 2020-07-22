@@ -66,6 +66,7 @@ export class DisplayBooksComponent implements OnInit {
     this.vendorService.deleteBooks(bookId, localStorage.getItem('token')).subscribe(
       (data) => {
         this.messageService.changeMessage();
+        location.reload();
       },
       (error: any) => {
         this.snackBar.open('Book Deletion Failed', 'ok', {duration: 2000});
@@ -76,6 +77,7 @@ export class DisplayBooksComponent implements OnInit {
   applyForApproval(bookId: any) {
     this.vendorService.applyForApproval(bookId).subscribe(response => {
       console.log('requested for approval', response);
+      location.reload();
     });
   }
 }

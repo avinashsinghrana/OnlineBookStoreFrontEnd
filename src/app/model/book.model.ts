@@ -9,4 +9,5 @@ export class Book {
   authorName: string;
   bookImgUrl: string;
   seller: string;
+
 }

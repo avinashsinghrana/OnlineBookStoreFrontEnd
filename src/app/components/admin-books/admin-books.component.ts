@@ -28,7 +28,7 @@ export class AdminBooksComponent implements OnInit {
 
   allBooks: any = [];
   books = [];
-  book: Book[];
+  // book: Book[];
   searchTerm: string;
   message: string;
   size: any;
@@ -68,17 +68,7 @@ export class AdminBooksComponent implements OnInit {
         });
       }
     );
-  }
-
-  onDisplayBooks(data) {
-    console.log(data);
-    if (data.status === 200) {
-      this.size = data.data.length;
-      data.data.forEach((bookData) => {
-        this.books.push(bookData);
-
-      });
-    }
+    this.ngOnInit();
   }
 
   onDisapproval(bookId, sellerId) {
@@ -94,7 +84,20 @@ export class AdminBooksComponent implements OnInit {
         this.snackBar.open('Failed to disapproved book', 'ok', {duration: 2000});
       }
     );
+    this.ngOnInit();
   }
+
+  onDisplayBooks(data) {
+    console.log(data);
+    if (data.status === 200) {
+      this.size = data.data.length;
+      data.data.forEach((bookData) => {
+        this.books.push(bookData);
+
+      });
+    }
+  }
+
 
   private getBooksOfAdmin() {
     if (localStorage.getItem('token') != null && localStorage.getItem('roleType') === 'ADMIN') {

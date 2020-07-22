@@ -114,14 +114,13 @@ export class SellerComponent implements OnInit {
         this.spinner.hide();
         this.img = this.response.data;
         localStorage.setItem(localStorage.getItem('email'), this.img);
+        this.userService.updateSellerProfilePic(this.response.data, localStorage.getItem('token')).subscribe(data => {
+          console.log('pic Url', this.picResponse.imgUrl);
+        });
       },
       err => {
         this.spinner.hide();
         this.snackbar.open('Profile pic uplodation failed!!', 'Ok', {duration: 2000});
       });
-    this.userService.updateProfilePic(this.img).subscribe(data => {
-      this.picResponse = data;
-      console.log('pic Url', this.picResponse.imgUrl);
-    });
   }
-  }
+}

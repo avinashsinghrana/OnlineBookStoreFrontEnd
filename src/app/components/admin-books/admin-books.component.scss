@@ -159,6 +159,31 @@ mat-card {
       width: 100%;
     }
   }
+.disapr-button {
+  height: 32px;
+  width: 70px;
+  font-size: x-small;
+  font-weight: bold;
+  background-color: #a03037;
+  color: white;
+  padding: 0px;
+  margin-top: 3%;
+  border: none;
+  outline: none;
+}
+
+.apr-button {
+  height: 32px;
+  width: 70px;
+  font-size: x-small;
+  font-weight: bold;
+  background-color: darkgreen;
+  color: white;
+  padding: 0px;
+  margin-top: 3%;
+  border: none;
+  outline: none;
+}
   @media only screen and (width: 823px) {
     .main-div {
       background-color: green($color: #000000);

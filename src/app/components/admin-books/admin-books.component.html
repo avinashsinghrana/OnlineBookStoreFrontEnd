@@ -5,16 +5,16 @@
     >({{ size }} items)</span
     >
   </div>
-<!--  <div style="width: 15%; height: 30%; border: 3px; outline-color: green;border-color: green ;padding: 2px;margin-right: 10%">-->
-<!--    <button style="background-color: white; border-radius: 3px ; color: green" (click)="requestdata()">click to get verified list</button>-->
-<!--  </div>-->
-<!--  <div style="width: 15%; height: 30%; border: 3px; padding: 2px;margin-right: 10%;">-->
-<!--    <select [(ngModel)]='sortTerm' (ngModelChange)='onSelect($event)'>-->
-<!--      <option value="none">sort by relevance</option>-->
-<!--      <option value="Verified">Verified Books</option>-->
-<!--      <option value="Unverified">Unverified Books</option>-->
-<!--    </select>-->
-<!--  </div>-->
+  <!--  <div style="width: 15%; height: 30%; border: 3px; outline-color: green;border-color: green ;padding: 2px;margin-right: 10%">-->
+  <!--    <button style="background-color: white; border-radius: 3px ; color: green" (click)="requestdata()">click to get verified list</button>-->
+  <!--  </div>-->
+  <!--  <div style="width: 15%; height: 30%; border: 3px; padding: 2px;margin-right: 10%;">-->
+  <!--    <select [(ngModel)]='sortTerm' (ngModelChange)='onSelect($event)'>-->
+  <!--      <option value="none">sort by relevance</option>-->
+  <!--      <option value="Verified">Verified Books</option>-->
+  <!--      <option value="Unverified">Unverified Books</option>-->
+  <!--    </select>-->
+  <!--  </div>-->
 </div>
 
 <div
@@ -29,7 +29,9 @@
   fxLayout.lg="row wrap"
   fxLayoutAlign.lg="start start"
 >
-  <div *ngFor="let book of allBooks  | bookFilter:searchTerm | paginate: { itemsPerPage: 4, currentPage: page, id: 'first' } ;let i = index" style="margin: 0px; " fxLayout="row">
+  <div
+    *ngFor="let book of allBooks  | bookFilter:searchTerm | paginate: { itemsPerPage: 4, currentPage: page, id: 'first' } ;let i = index"
+    style="margin: 0px; " fxLayout="row">
     <mat-card>
 
       <div class="bookImageDiv" fxLayoutAlign="center">
@@ -44,8 +46,9 @@
         <div fxlayout="row">
           <span class="input-price-span">Rs. {{ book.price }}</span>
         </div>
-        <div fxlayout="row" class="input-author">Seller {{ book.seller }}</div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
+        <!--        for new  Request      -->
+        <div *ngIf="book.disapproved === false && book.verfied === false" fxLayout="row"
+             fxLayoutAlign="space-between">
           <button
             class="delete-button"
             mat-raised-button
@@ -64,19 +67,54 @@
           >
             Approve
           </button>
-
+        </div>
+        <!--        after admin response-->
+        <div *ngIf="book.disapproved === true" fxLayout="row"
+             fxLayoutAlign="space-between">
+          <button
+            style="
+          height: 32px;
+          width: 100%;
+          background-color: darkred;
+          border-radius: 2px;
+          color: white;
+          font-size: 14px;
+          font-family: Lato, sans-serif, Bold;
+          text-align: center;"
+            mat-button
+            class="disapr-button" mat-raised-button
+            fxLayoutAlign="center" [disableRipple]="true"
+          >
+            Disapproved
+          </button>
+        </div>
+        <div *ngIf="book.verfied === true" fxLayout="row"
+             fxLayoutAlign="space-between">
+          <button
+            style="
+          height: 32px;
+          width: 100%;
+          align-content: center;
+          background-color: darkgreen;
+          border-radius: 2px;
+          color: white;
+          font-size: 14px;
+          font-family: Lato, sans-serif, Bold;
+          text-align: center;"
+            mat-button
+            class="apr-button" mat-raised-button
+            fxLayoutAlign="center" [disableRipple]="true"
+          >
+            Approved
+          </button>
         </div>
       </div>
     </mat-card>
-    <div class="book-details">
-      <h4 style="text-align: center;margin-top: 0mm;">Book Details</h4>
-      <span style="font-size: medium;">{{ book.bookDetails }}</span>
-    </div>
   </div>
 </div>
-  <div class="paginator">
-    <pagination-controls
-      (pageChange)="page = $event"
-      id="first"
-    ></pagination-controls>
-  </div>
+<div class="paginator">
+  <pagination-controls align="center"
+    (pageChange)="page = $event"
+    id="first"
+  ></pagination-controls>
+</div>

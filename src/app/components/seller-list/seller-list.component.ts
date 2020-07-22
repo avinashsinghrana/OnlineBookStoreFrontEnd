@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {SellerListService} from '../../services/sellerList/seller-list.service';
-import {Seller} from '../../model/seller.model';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 
@@ -11,7 +10,7 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./seller-list.component.scss']
 })
 export class SellerListComponent implements OnInit {
-  sellerLists: Seller[];
+  sellerLists: any[];
   page = 1;
   name = localStorage.getItem('name');
 
@@ -33,9 +32,9 @@ export class SellerListComponent implements OnInit {
   }
 
   private getAllSellerDetails() {
-    if (localStorage.getItem('token') !== null && localStorage.getItem('roleType') === 'ADMIN'){
-      this.sellerListService.getAllsellerList().subscribe(data => {
-        this.sellerLists = data;
+    if (localStorage.getItem('token') !== null && localStorage.getItem('roleType') === 'ADMIN') {
+      this.sellerListService.getAllsellerList().subscribe(response => {
+        this.sellerLists = response.data;
       });
     }
   }

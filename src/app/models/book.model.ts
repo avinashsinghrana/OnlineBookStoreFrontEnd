@@ -11,4 +11,6 @@ export interface Book {
   isApproved: boolean;
   rejectionCounts: any;
   isApprovalSent: boolean;
+  isDisapproved: boolean;
+  forApproval: boolean;
 }

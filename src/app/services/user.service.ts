@@ -73,11 +73,11 @@ export class UserService {
     // return this.http.POST('users/uploadImage',file,{ headers: new HttpHeaders().set('token', localStorage.getItem('token')),params: new HttpParams().set('isProfile', isProfile) });
   }
 
-  updateProfilePic(img: string): Observable<any> {
+  updateSellerProfilePic(img: string, token: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
-    return this.http.post('http://localhost:8081/user/addImg?imageUrl=' + img + '&token=' + localStorage.getItem('token'), httpOptions);
+    return this.http.put('http://localhost:8081/user/addImg?imageUrl=' + img + '&token=' + token, httpOptions);
   }
 }
 

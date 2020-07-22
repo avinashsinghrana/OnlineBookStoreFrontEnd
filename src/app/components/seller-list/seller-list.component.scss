@@ -4,12 +4,6 @@
   border: none;
   outline: none;
 }
-.input-title {
-  font-size: medium;
-  font-weight: bold;
-  border: none;
-  outline: none;
-}
 
 .input-quant {
   font-size: small;
@@ -40,11 +34,13 @@ img {
 }
 
 .input-title {
-  font-size: medium;
+  font-size: small;
   font-weight: bold;
   border: none;
   outline: none;
+  margin-top: -16px;
 }
+
 @media only screen and (width: 640px) {
   .main-div {
     background-color: green($color: #000000);
@@ -70,4 +66,14 @@ img {
   align-items: center;
   font-size: 100%;
   margin-left: 40%;
+}
+
+.mat-icon{
+    fill: dodgerblue;
+    font-size: 10px;
+    }
+
+.mat-con-seller {
+  margin-top: -18px;
+  margin-left: 174px;
 }
