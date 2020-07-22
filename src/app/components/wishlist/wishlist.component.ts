@@ -20,24 +20,24 @@ export class WishlistComponent implements OnInit {
   }
 
   removeFromWishList(bookId: any) {
-    this.wishService.removeFromWL(bookId, localStorage.getItem('token')).subscribe(data => {
-      console.log(data);
+    this.wishService.removeFromWL(bookId, localStorage.getItem('token')).subscribe(reponse => {
+      console.log(reponse.data);
       if (this.books.length > 0) {
         this.getAllBookOfWL();
       }
     });
   }
 
-  addToCart(bookId: any) {
-    this.wishService.addtoCartFromWL(bookId, localStorage.getItem('token')).subscribe(data => {
-      console.log(data);
+  addToCart(bookId: any): any {
+    this.wishService.addtoCartFromWL(bookId, localStorage.getItem('token')).subscribe(response => {
+      console.log(response.data);
       this.getAllBookOfWL();
     });
   }
 
-  public getAllBookOfWL() {
-    this.wishService.getBookOfWishList(localStorage.getItem('token')).subscribe(data => {
-      this.books = data;
+  public getAllBookOfWL(): any {
+    this.wishService.getBookOfWishList(localStorage.getItem('token')).subscribe(response => {
+      this.books = response.data;
     });
   }
 }

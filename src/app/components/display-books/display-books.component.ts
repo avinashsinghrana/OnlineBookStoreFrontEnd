@@ -17,6 +17,7 @@ export class DisplayBooksComponent implements OnInit {
   message: string;
   // sortTearm: string;
   // searchTerm = localStorage.getItem('searchTerm');
+  page = 1;
   constructor(
     private vendorService: SellerService,
     private messageService: MessageService,

@@ -22,8 +22,8 @@ export class MessageService {
   currentItem$ = this.itemSource.asObservable();
 
   constructor(
-    private vendorService: SellerService,
-  ) {
+    private vendorService: SellerService)
+  {
   }
 
   changeEvent(message: string) {

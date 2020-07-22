@@ -11,7 +11,7 @@
   fxLayout.lg="row wrap"
   fxLayoutAlign.lg="start start"
 >
-  <div *ngFor="let book of books  | bookFilter:searchTerm" style="margin: 0px; " fxLayout="row">
+  <div *ngFor="let book of books  | bookFilter:searchTerm | paginate: { itemsPerPage: 8, currentPage: page, id: 'first' } " style="margin: 0px; " fxLayout="row" >
     <mat-card>
 
      <div class="bookImageDiv" fxLayoutAlign="center">
@@ -118,4 +118,10 @@
       </div>
     </mat-card>
   </div>
+</div>
+<div class="paginator">
+  <pagination-controls
+    (pageChange)="page = $event"
+    id="first"
+  ></pagination-controls>
 </div>

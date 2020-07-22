@@ -47,16 +47,16 @@ export class OrderSummaryComponent implements OnInit {
   }
 
 
-  getAllBookCart() {
+  getAllBookCart(): any {
     // tslint:disable-next-line:max-line-length
     // if (localStorage.getItem('token') === null || localStorage.getItem('token') !== null && localStorage.getItem('roleType') !== 'USER') {
     //   this.books = localStorage.getItem('CartObject');
     // }
     // else {
     this.cartService.getAllBookCart(localStorage.getItem('token')).subscribe((response: any) => {
-      this.books = response;
-      this.size = response.length;
-      console.log(response);
+      this.books = response.data;
+      this.size = response.data.length;
+      console.log(response.data);
     });
     // }
   }
@@ -72,19 +72,19 @@ export class OrderSummaryComponent implements OnInit {
     this.popDown = true;
   }
 
-  increaseQuantity(bookId: any, i: number) {
+  increaseQuantity(bookId: any, i: number): any {
     this.books[i].quantity++;
     this.cartService.addBooks(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-      console.log('response', response);
+      console.log('response', response.data);
       this.getAllBookCart();
     });
   }
 
-  decreaseQuantity(bookId: any, i: number) {
+  decreaseQuantity(bookId: any, i: number): any {
     this.books[i].quantity--;
     if (this.books[i].quantity > 0) {
       this.cartService.removeItem(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-        console.log('response=', response);
+        console.log('response=', response.data);
         this.getAllBookCart();
       });
     }
@@ -98,21 +98,21 @@ export class OrderSummaryComponent implements OnInit {
   }
 
 
-  removeAllItemsCart(bookId: any) {
+  removeAllItemsCart(bookId: any): any {
     this.cartService.removeBookFromCart(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-      console.log('response', response);
+      console.log('response', response.data);
       this.getAllBookCart();
     });
     // window.location.reload();
   }
 
-  onPress() {
+  onPress(): any {
     console.log('data1', this.registerForm.value);
     this.token = localStorage.getItem('token');
     if (this.registerForm.valid) {
       this.customerDetailsService.addDetails(this.registerForm.value, this.token).subscribe((response: any) => {
         console.log('data', this.registerForm.value);
-        console.log('response', response);
+        console.log('response', response.data);
       });
     }
     this.press = true;
@@ -121,7 +121,7 @@ export class OrderSummaryComponent implements OnInit {
   checkout(): any {
     this.token = localStorage.getItem('token');
     this.cartService.removeAll(this.token).subscribe((response: any) => {
-      console.log('response', response);
+      console.log('response', response.data);
       this.router.navigate(['/order-confirmation']);
     });
   }

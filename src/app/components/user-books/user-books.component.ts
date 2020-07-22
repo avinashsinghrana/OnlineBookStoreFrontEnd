@@ -75,14 +75,14 @@ export class UserBooksComponent implements OnInit {
     // });
   }
 
-  updateStatus() {
+  updateStatus(): any {
     if (localStorage.getItem('token') !== null && localStorage.getItem('roleType') === 'USER') {
-      this.wishlistService.getIdFromWishList().subscribe(data => {
-        this.cartValue = data;
+      this.wishlistService.getIdFromWishList().subscribe(response => {
+        this.cartValue = response.data;
         localStorage.setItem('cartItem', this.cartValue.length);
       });
-      this.cartServiceService.getIdFromCartList().subscribe(data => {
-        this.wishValue = data;
+      this.cartServiceService.getIdFromCartList().subscribe(response => {
+        this.wishValue = response.data;
         localStorage.setItem('wishItem', this.wishValue.length);
       });
     }
@@ -101,7 +101,7 @@ export class UserBooksComponent implements OnInit {
     console.log('sorting term', this.sortTerm);
   }
 
-  onWish(bookId: any) {
+  onWish(bookId: any): any {
     if (localStorage.getItem('token') === null || localStorage.getItem('token') !== null && localStorage.getItem('roleType') !== 'USER') {
       this.snackBar.open('Login to add book into WishList', 'OK', {
         duration: 2500,
@@ -115,7 +115,7 @@ export class UserBooksComponent implements OnInit {
     }
   }
 
-  onDisplayBooks(data) {
+  onDisplayBooks(data): any {
     console.log(data);
     if (data.status === 200) {
       this.size = data.data.length;
@@ -171,7 +171,7 @@ export class UserBooksComponent implements OnInit {
   }
 
 
-  valueCheck(i: number, bookId: any) {
+  valueCheck(i: number, bookId: any): any {
     let key = -1;
     for (let i = 0; i <= this.cartValue.length; i++) {
       if (this.cartValue[i] === bookId) {
@@ -181,7 +181,7 @@ export class UserBooksComponent implements OnInit {
     return key;
   }
 
-  wishCheck(i: number, bookId: any) {
+  wishCheck(i: number, bookId: any): any {
     let key = -1;
     for (let i = 0; i <= this.wishValue.length; i++) {
       if (this.wishValue[i] === bookId) {
@@ -189,22 +189,5 @@ export class UserBooksComponent implements OnInit {
       }
     }
     return key;
-  }
-
-  // private setValueToLocalStorage(cartObject: any[]) {
-  //   localStorage.setItem('CartObjet', JSON.stringify(cartObject));
-  // }
-  //
-  // private getValueToLocalStorage(): any[] {
-  //   return localStorage.getItem('CartObjet') === null ? [] : JSON.parse(localStorage.getItem('CartObjet'));
-  // }
-  private addBookToCartInLocal(book: any) {
-    // @ts-ignore
-    // this.cartObjects.unshift(bookId);
-    localStorage.setItem(book.bookId, JSON.stringify(book));
-  }
-
-  private getAllCartDataFromLocal(): Book[] {
-    return JSON.parse(localStorage.getItem('cartObjects'));
   }
 }
