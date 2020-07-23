@@ -127,34 +127,13 @@ export class UserBooksComponent implements OnInit {
 
 
   onAddBook(bookId: any) {
-    // ****************************************************************************//
-    // tslint:disable-next-line:one-variable-per-declaration
-    // const target = event.target,
-    //   count = +target.dataset.count;
-    // target.style.backgroundColor = count === 1 ? '#7FFF00' : '#FFFFFF';
-    // target.dataset.count = count === 1 ? 0 : 1;
-    // ****************************************************************************//
-    //     this.toggle = !this.toggle;
-    //     this.cartServices.addToBag(bookId, this.token).subscribe((message) => {
-    //       console.log(message);
-    //       this.updateStatus();
-    //       this.data.changeItem(message.data);
-    //       this.snackBar.open('Book Added to Bag SuccessFully', 'OK', {
-    //         duration: 600,
-    //       });
-    //     });
-    //   }
-
-
-    // to store in cart
-    //
     if (localStorage.getItem('token') === null || localStorage.getItem('token') !== null && localStorage.getItem('roleType') !== 'USER') {
       // this.addBookToCartInLocal(bookId);
       this.snackBar.open('Login to add book into cart', 'OK', {
         duration: 2500,
       });
     } else {
-      // **********************************************************
+      // ********************************************************** //
       this.toggle = !this.toggle;
       this.item += 1;
       this.token = localStorage.getItem('token');

@@ -39,13 +39,13 @@ export class AdminBooksComponent implements OnInit {
   ngOnInit() {
     this.getBooksOfAdmin();
     this.sortTerm = 'none';
-    this.messageService.currentBooks.subscribe((data) => {
-      this.books = [];
-      this.onDisplayBooks(data);
-    });
-    this.messageService.currentEvent$.subscribe(message => {
-      this.searchTerm = message;
-    });
+    // this.messageService.currentBooks.subscribe((data) => {
+    //   this.books = [];
+    //   this.onDisplayBooks(data);
+    // });
+    // this.messageService.currentEvent$.subscribe(message => {
+    //   this.searchTerm = message;
+    // });
   }
 
   onBookDetail(event) {
@@ -54,8 +54,10 @@ export class AdminBooksComponent implements OnInit {
 
   onApproval(bookId: any, sellerId: any) {
     this.vendorService.onApprove(bookId, sellerId, localStorage.getItem('token')).subscribe(
-      (data) => {
-        if (data.status === 200) {
+      (response) => {
+        console.log('aprrove log', response);
+        this.getBooksOfAdmin();
+        if (response.status === 200) {
           this.messageService.changeBooks();
           this.snackBar.open('Book approved successfully', 'ok', {
             duration: 2000,
@@ -68,14 +70,15 @@ export class AdminBooksComponent implements OnInit {
         });
       }
     );
-    this.ngOnInit();
   }
 
-  onDisapproval(bookId, sellerId) {
+  onDisapproval(bookId: number, sellerId: number) {
     console.log(bookId);
     this.vendorService.disApproveBook(bookId, sellerId, localStorage.getItem('token')).subscribe(
-      (data) => {
+      (response) => {
         this.messageService.changeBooks();
+        console.log('aprrove log', response);
+        this.getBooksOfAdmin();
         this.snackBar.open('Book disapproved successfully', 'ok', {
           duration: 2000,
         });
@@ -84,25 +87,25 @@ export class AdminBooksComponent implements OnInit {
         this.snackBar.open('Failed to disapproved book', 'ok', {duration: 2000});
       }
     );
-    this.ngOnInit();
   }
 
-  onDisplayBooks(data) {
-    console.log(data);
-    if (data.status === 200) {
-      this.size = data.data.length;
-      data.data.forEach((bookData) => {
-        this.books.push(bookData);
-
-      });
-    }
-  }
+  // onDisplayBooks(data) {
+  //   console.log(data);
+  //   if (data.status === 200) {
+  //     this.size = data.data.length;
+  //     data.data.forEach((bookData) => {
+  //       this.books.push(bookData);
+  //
+  //     });
+  //   }
+  // }
 
 
   private getBooksOfAdmin() {
     if (localStorage.getItem('token') != null && localStorage.getItem('roleType') === 'ADMIN') {
-      this.vendorService.getAllBooksOfAdmin().subscribe(data => {
-        this.allBooks = data;
+      this.vendorService.getAllBooksOfAdmin().subscribe(response => {
+        this.allBooks = response.data;
+        console.log('book', response.data);
         this.size = this.allBooks.length;
       });
     }

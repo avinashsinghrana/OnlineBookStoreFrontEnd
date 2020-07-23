@@ -112,7 +112,7 @@ export class HttpService {
      return this.http.get(this.apiBaseurl + 'url', token);
    }*/
 
-  public getOrderId(url: any) {
+  public getOrderId(url: any): any {
     return this.http.get(url);
   }
 

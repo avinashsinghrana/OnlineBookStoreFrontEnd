@@ -9,7 +9,7 @@ export class OrderconfirmationService {
   constructor(private httpService: HttpService) {
   }
 
-  fetchOrderId() {
+  fetchOrderId(): any {
     return this.httpService.getOrderId('http://localhost:8081/user/orderId');
   }
 }

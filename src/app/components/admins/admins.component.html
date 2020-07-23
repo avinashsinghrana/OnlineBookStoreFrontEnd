@@ -27,7 +27,7 @@
     <span class="spanClass"></span>
     <!-- user profile pic -->
     <button mat-mini-fab class="imageSelect"
-            [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover','width':'52px','height':'52px'}"
+            [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover','width':'37px','height':'37px'}"
             [matMenuTriggerFor]="menu1" colour="basic" matTooltip="Admin Account"
             [matTooltipClass]="'my-tooltip'" fxLayout="row" fxLayoutAlign="end center">
     </button>
@@ -35,7 +35,7 @@
     <mat-menu id="profile" #menu1="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
       <div class="backgroundimage">
         <button (click)="$event.stopPropagation()"
-                [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover','width':'115px','height':'115px'}"
+                [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover','width':'85px','height':'85px','margin-bottom': '15px','margin-left': '12px'}"
                 (click)="imageSelectFile.click()" matTooltip="{{username}}" mat-mini-fab class="imageSelect">
           <mat-icon class="icons" matSuffix>add_a_photo</mat-icon>
         </button>

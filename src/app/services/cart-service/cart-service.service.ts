@@ -27,8 +27,8 @@ export class CartServiceService {
     return this.httpService.removeAllItemsCart('http://localhost:8081/user/removeBookFromCart?bookId=' + bookId + '&token=' + token);
   }
 
-  removeAll(token: any): Observable<any> {
-    return this.httpService.clearCart('http://localhost:8081/user/removeAll?token=' + token);
+  removeAll(token: any, item: any): Observable<any> {
+    return this.httpService.clearCart('http://localhost:8081/user/removeAll?token=' + token + '&id=' + item);
   }
 
   getIdFromCartList(): Observable<any> {

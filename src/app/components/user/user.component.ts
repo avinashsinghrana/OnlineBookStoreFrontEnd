@@ -32,8 +32,8 @@ export class UserComponent implements OnInit {
   sorting: Sortmethod[];
   // item: any;
   // wishitem: any;
-  item = localStorage.getItem('cartItem') === null ? 0 : localStorage.getItem('cartItem');
-  wishitem = localStorage.getItem('wishItem') === null ? 0 : localStorage.getItem('wishItem');
+  item: number | string = 0;
+  wishitem: number | string = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -48,8 +48,6 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.item = localStorage.getItem('cartItem') === null ? 0 : localStorage.getItem('cartItem');
-    this.wishitem = localStorage.getItem('wishItem') === null ? 0 : localStorage.getItem('wishItem');
     this.messageService.changeMessages();
     this.messageService.currentItem$.subscribe(message => {
       this.item = message;
@@ -69,6 +67,8 @@ export class UserComponent implements OnInit {
       this.isLogin = false;
       this.img = 'https://ravi023.s3.ap-south-1.amazonaws.com/1594052103459-profile.png';
     }
+    this.item = localStorage.getItem('cartItem') === null ? 0 : localStorage.getItem('cartItem');
+    this.wishitem = localStorage.getItem('wishItem') === null ? 0 : localStorage.getItem('wishItem');
   }
 
   openBookForm() {

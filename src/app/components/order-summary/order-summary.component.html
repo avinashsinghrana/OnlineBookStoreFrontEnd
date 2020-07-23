@@ -121,7 +121,7 @@
             <mat-error
               *ngIf="registerForm.hasError('required', ['phoneNumber'])"
             >
-              Field must not be Empty
+              Field must not be Empty and should have valid mobile number
             </mat-error
             >
           </mat-form-field>
@@ -135,7 +135,7 @@
             <mat-label>Pincode</mat-label>
             <input matInput formControlName="pinCode" required/>
             <mat-error *ngIf="registerForm.hasError('required', ['pinCode'])">
-              Field must not be Empty
+              Field must not be Empty and should have 6-digit pincode
             </mat-error
             >
           </mat-form-field>
@@ -163,7 +163,7 @@
           required
         ></textarea>
         <mat-error *ngIf="registerForm.hasError('required', ['address'])">
-          Field must not be Empty
+          Field must not be Empty and Should have more than 30 characters
         </mat-error
         >
       </mat-form-field>
@@ -211,11 +211,10 @@
     fxLayoutGap="50px"
     (change)="onChange($event)"
   >
-    <mat-radio-button name="home" value="home" checked="true">Home</mat-radio-button>
-    <mat-radio-button name="work" value="work"> Work</mat-radio-button>
-    <mat-radio-button name="other" value="other">Other</mat-radio-button>
+    <mat-radio-button name="home" value="HOME" checked="true">Home</mat-radio-button>
+    <mat-radio-button name="work" value="WORK"> Work</mat-radio-button>
+    <mat-radio-button name="other" value="OTHER">Other</mat-radio-button>
   </mat-radio-group>
-
   <button
     mat-flat-button
     color="primary"

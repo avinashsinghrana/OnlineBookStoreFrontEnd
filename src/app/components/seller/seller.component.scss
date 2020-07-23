@@ -54,6 +54,7 @@
   }
   .spanClass {
     flex-grow: 0.5;
+    margin-right: 128px;
   }
 
   .bookInput {
@@ -107,6 +108,7 @@
   }
   //************
   .imageSelect {
+    margin-right: 128px;
    margin-left: 43px;
 
   }
@@ -157,13 +159,13 @@
   .footer {
     height: 5px;
     background: #2e1d1efa 0% 0% no-repeat padding-box;
-    opacity: 90%;
+    opacity: 100%;
     position: fixed;
-    left: 0;
+    left: -3px;
     bottom: 0;
     width: 98%;
   }
-  
+
   .footerText {
     font-size: x-small;
     text-align: center;

@@ -23,6 +23,7 @@ export class OrderSummaryComponent implements OnInit {
   books: any;
   person: string;
   token: string;
+  radioresponse = String;
 
   constructor(public formBuilder: FormBuilder,
               private dialog: MatDialog,
@@ -33,14 +34,14 @@ export class OrderSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      fullName: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
-      locality: ['', [Validators.required]],
-      pinCode: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      landMark: ['', [Validators.required]],
-      locationType: ['', [Validators.required]]
+      fullName: ['', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z]+(\\s[A-Z][a-zA-Z]+)*')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('(0|91)?[6-9][0-9]{9}')]],
+      locality: ['', [Validators.required, Validators.pattern('([A-Z]?[a-zA-Z\\s0-9]+){2,}')]],
+      pinCode: ['', [Validators.required, Validators.pattern('[1-9][0-9]{5}')]],
+      address: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9\\s\,\-\.()]{30,}')]],
+      city: ['', [Validators.required, Validators.pattern('[A-Z]?[a-z]{3,}')]],
+      landMark: ['', [Validators.required, Validators.pattern('^[A-Z]?[a-z\\s]{5,}')]],
+      locationType : this.radioresponse,
     });
     this.getAllBookCart();
     console.log('address', this.registerForm);
@@ -56,7 +57,7 @@ export class OrderSummaryComponent implements OnInit {
     this.cartService.getAllBookCart(localStorage.getItem('token')).subscribe((response: any) => {
       this.books = response.data;
       this.size = response.data.length;
-      console.log(response.data);
+      console.log(response);
     });
     // }
   }
@@ -75,7 +76,7 @@ export class OrderSummaryComponent implements OnInit {
   increaseQuantity(bookId: any, i: number): any {
     this.books[i].quantity++;
     this.cartService.addBooks(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-      console.log('response', response.data);
+      console.log('response', response);
       this.getAllBookCart();
     });
   }
@@ -84,7 +85,7 @@ export class OrderSummaryComponent implements OnInit {
     this.books[i].quantity--;
     if (this.books[i].quantity > 0) {
       this.cartService.removeItem(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-        console.log('response=', response.data);
+        console.log('response=', response);
         this.getAllBookCart();
       });
     }
@@ -100,19 +101,20 @@ export class OrderSummaryComponent implements OnInit {
 
   removeAllItemsCart(bookId: any): any {
     this.cartService.removeBookFromCart(bookId, localStorage.getItem('token')).subscribe((response: any) => {
-      console.log('response', response.data);
+      console.log('response', response);
       this.getAllBookCart();
     });
     // window.location.reload();
   }
 
   onPress(): any {
-    console.log('data1', this.registerForm.value);
+    // console.log('data1', this.registerForm.value);
     this.token = localStorage.getItem('token');
     if (this.registerForm.valid) {
       this.customerDetailsService.addDetails(this.registerForm.value, this.token).subscribe((response: any) => {
         console.log('data', this.registerForm.value);
-        console.log('response', response.data);
+        localStorage.setItem('AdressId', response.data);
+        console.log('response', response);
       });
     }
     this.press = true;
@@ -120,15 +122,17 @@ export class OrderSummaryComponent implements OnInit {
 
   checkout(): any {
     this.token = localStorage.getItem('token');
-    this.cartService.removeAll(this.token).subscribe((response: any) => {
+    this.cartService.removeAll(this.token, localStorage.getItem('AdressId')).subscribe((response: any) => {
       console.log('response', response.data);
+      localStorage.removeItem('AdressId');
+      localStorage.removeItem('cartItem');
       this.router.navigate(['/order-confirmation']);
     });
   }
 
-  onChange(val: any) {
+  onChange(val: MatRadioChange) {
     this.sortTerm = val;
-    this.person = this.sortTerm;
-    console.log('sorting term', this.sortTerm);
+    this.radioresponse = this.sortTerm.value;
+    console.log(this.radioresponse);
   }
 }

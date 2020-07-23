@@ -21,7 +21,7 @@ export class SellerService {
   private getBookApi = '/user/getallBooks';
 
   constructor(private http: HttpClient, private service: HttpService,
-              private sellerListService: SellerListService,
+              public sellerListService: SellerListService,
   ) {
   }
 
@@ -87,9 +87,10 @@ export class SellerService {
       'http://localhost:8081/admin/bookVerification/' + sellerId + '/' + bookId + '/' + token);
   }
 
-  getAllBooksOfAdmin() {
+  getAllBooksOfAdmin(): any {
     console.log('sellerlist value in seller service', this.sellerListService.sellerId);
-    return this.http.get('http://localhost:8081/admin/getBooksForVerification?sellerId=' + localStorage.getItem('sellerListId'));
+    // tslint:disable-next-line:radix
+    return this.http.get('http://localhost:8081/admin/getBooksForVerification?sellerId=' + parseInt(localStorage.getItem('sellerListId')));
 
   }
 
