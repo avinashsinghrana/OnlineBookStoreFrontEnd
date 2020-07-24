@@ -28,7 +28,8 @@ export const environment = {
   confirmOrder: "confirm-order",
   profilePicPath: "/user/uploadFile",
   addBookPath: "/sellers/addBook",
-  addimg:'/sellers/addImg'
+  addimg:'/sellers/addImg',
+  addImg:'/user/addImg'
 };
 
 /*

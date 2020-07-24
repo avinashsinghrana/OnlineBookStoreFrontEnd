@@ -47,69 +47,67 @@
         </div>
 
         <!--        button        -->
-
-        <div *ngIf="valueCheck(i, book.bookId) != book.bookId" fxLayout="row" fxLayoutAlign="space-between">
-          <button class="delete-button"
-                  mat-raised-button fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
-            Add to cart
-          </button>
-          <div>
-            <button class="WishToCart-button"
-              *ngIf="wishCheck(i, book.bookId) != book.bookId "
-              class="update-button"
-              mat-raised-button
-              fxLayoutAlign="center"
-              [disableRipple]="true"
-              (click)="onWish(book.bookId)">
-              Add to WL
+          <div *ngIf="valueCheck(i, book.bookId) != book.bookId" fxLayout="row" fxLayoutAlign="space-between">
+            <button class="delete-button"
+                    mat-raised-button fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
+              Add to cart
             </button>
+            <div>
+              <button class="WishToCart-button"
+                      *ngIf="wishCheck(i, book.bookId) != book.bookId "
+                      class="update-button"
+                      mat-raised-button
+                      fxLayoutAlign="center"
+                      [disableRipple]="true"
+                      (click)="onWish(book.bookId)">
+                Wishlist
+              </button>
+            </div>
+            <div>
+              <button
+                *ngIf="wishCheck(i, book.bookId) === book.bookId"
+                class="update-button"
+                mat-raised-button
+                fxLayoutAlign="center"
+                [disableRipple]="true"
+                [disabled]="wishCheck(i, book.bookId) === book.bookId"
+                (click)="onWish(book)">
+                Wishlisted
+              </button>
+            </div>
           </div>
-          <div>
+          <div *ngIf="valueCheck(i, book.bookId) == book.bookId">
             <button
-              *ngIf="wishCheck(i, book.bookId) === book.bookId"
-              class="update-button"
-              mat-raised-button
-              fxLayoutAlign="center"
-              [disableRipple]="true"
-              [disabled]="wishCheck(i, book.bookId) === book.bookId"
-              (click)="onWish(book)">
-              Added To WL
+              style="
+              height: 32px;
+              width: 100%;
+              background-color: #3371b5;
+              border-radius: 2px;
+              color: whitesmoke;
+              text-align: center;"
+              mat-button
+              [disabled]="valueCheck(i, book.bookId) == book.bookId" class="delete-button" mat-raised-button
+              fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
+              Added to cart
             </button>
           </div>
-        </div>
-        <div *ngIf="valueCheck(i, book.bookId) == book.bookId || book.quantity <= 0">
-          <button
-            style="
-          height: 32px;
-          width: 100%;
-          background-color: #3371b5;
-          border-radius: 2px;
-          color: whitesmoke;
-          text-align: center;"
-            mat-button
-                  [disabled]="valueCheck(i, book.bookId) == book.bookId" class="delete-button" mat-raised-button
-                  fxLayoutAlign="center" [disableRipple]="true" (click)="onAddBook(book)">
-            Added to cart
-          </button>
         </div>
 
         <!--        out of stock -->
-        <div *ngIf="book.quantity <= 0">
-          <div style="
-          height: 32px;
-          width: 100%;
-          margin-top: -200px;
-          background-color: white;
-          border-radius: 2px;
-          color:black;
-          text-align: center;
-          opacity: 90%;
-        ">
-            Out Of Stock
-          </div>
-        </div>
 
-      </div>
+<!--          <div-->
+<!--            style="-->
+<!--          height: 32px;-->
+<!--          width: 100%;-->
+<!--          margin-top: -200px;-->
+<!--          background-color: white;-->
+<!--          border-radius: 2px;-->
+<!--          color:black;-->
+<!--          text-align: center;-->
+<!--          opacity: 90%;-->
+<!--        ">-->
+<!--            Out Of Stock-->
+<!--          </div>-->
     </mat-card>
 
 

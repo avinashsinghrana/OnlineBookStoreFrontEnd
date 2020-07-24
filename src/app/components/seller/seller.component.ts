@@ -107,16 +107,13 @@ export class SellerComponent implements OnInit {
     // tslint:disable-next-line:prefer-const
     var formData = new FormData();
     formData.append('file', this.imgFile);
-    this.userService.profilePic(formData).subscribe(
+    this.userService.setprofilePic(formData).subscribe(
       data => {
         console.log('------------------------------', data);
         this.response = data;
         this.spinner.hide();
         this.img = this.response.data;
         localStorage.setItem(localStorage.getItem('email'), this.img);
-        this.userService.updateSellerProfilePic(this.response.data, localStorage.getItem('token')).subscribe(data => {
-          console.log('pic Url', this.picResponse.imgUrl);
-        });
       },
       err => {
         this.spinner.hide();

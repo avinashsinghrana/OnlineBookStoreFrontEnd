@@ -10,22 +10,22 @@ export class OrderConfirmationComponent implements OnInit {
 
   constructor(private orderconfirmation: OrderconfirmationService) {
   }
-  orderId: any;
+
+  orderId: string;
 
   ngOnInit(): void {
-    // this.getOrderId();
-  }
-  tranfOrderId(): any {
-    return '#' + this.getOrderId();
+    this.getOrderId();
   }
 
-  getOrderId(){
-    let orderId = '';
+  tranfOrderId(): string {
+    console.log('order Id', this.orderId);
+    return '#' + this.orderId;
+  }
+
+  getOrderId() {
     this.orderconfirmation.fetchOrderId().subscribe(response => {
-      localStorage.setItem('OrderId', response.toString());
-      console.log(response);
-      orderId = response;
+      console.log('response', response);
+      this.orderId = response.imgUrl;
     });
-    return orderId;
   }
 }

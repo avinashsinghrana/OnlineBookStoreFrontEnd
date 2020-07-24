@@ -46,11 +46,13 @@
           <p class="book-names">{{ book.bookName | uppercase }} </p>
           <p class="book-names1">{{ book.authorName }}</p>
           <p class="book-names2">Rs.{{ book.price }}</p>
+          <p class="status-book">Only {{ book.actualQuantity }} left</p>
+
         </div>
         <div class="quantity">
           <button
             mat-icon-button
-            (click)="decreaseQuantity(book.bookId, i)"
+            (click)="decreaseQuantity(book)"
             [disabled]="getQuantitiy(i) "
           >
             <mat-icon class="material-icons-outlined"
@@ -63,7 +65,7 @@
             class="quantity-holder"
             [(ngModel)]="book.quantity"
           />
-          <button mat-icon-button (click)="increaseQuantity(book.bookId, i)">
+          <button mat-icon-button [disabled]="book.actualQuantity === book.quantity" (click)="increaseQuantity(book)">
             <mat-icon class="material-icons-outlined"
             >add_circle_outline
             </mat-icon
@@ -203,6 +205,16 @@
         </td>
       </tr>
     </table>
+<!--    <label class="example-radio-group">Type</label>-->
+<!--    <mat-radio-group-->
+<!--      aria-label="Select an option"-->
+<!--      fxLayoutGap="50px"-->
+<!--      (change)="onChange($event)"-->
+<!--    >-->
+<!--      <mat-radio-button name="home" value="HOME" checked="true">Home</mat-radio-button>-->
+<!--      <mat-radio-button name="work" value="WORK"> Work</mat-radio-button>-->
+<!--      <mat-radio-button name="other" value="OTHER">Other</mat-radio-button>-->
+<!--    </mat-radio-group>-->
   </form>
   <!-- (change)="onChange($event)" -->
   <label class="example-radio-group">Type</label>
@@ -219,6 +231,7 @@
     mat-flat-button
     color="primary"
     class="Continue"
+    [disabled]="!registerForm.valid"
     *ngIf="!press"
     (click)="onPress()"
   >
@@ -254,6 +267,20 @@
           <p class="book-names5">Rs.{{ book.price }}</p>
         </div>
       </mat-card-content>
+    </mat-card>
+  </div>
+  <div >
+    <mat-card>
+<!--      <p>Price Details</p>-->
+<!--      <div fxLayout="row">-->
+<!--        <p>price({{size}}item)</p>-->
+<!--        <p class="priceTotal">Rs.0</p>-->
+<!--      </div>-->
+<!--      <hr>-->
+      <div  fxLayout="row">
+        <p [ngStyle] = "{'font-family': 'Lato, sans-serif, Bold', 'font-size': 'medium'}"> Total Amount </p>
+        <p class="grandTotal" style="font-family: Lato, sans-serif, Bold; font-size: medium">Rs.{{totalCostOfBook()}}</p>
+      </div>
     </mat-card>
   </div>
   <button

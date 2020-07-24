@@ -14,7 +14,7 @@
   opacity: 1;
 }
 
-.footer{ 
+.footer{
   // width: 1308px;
   height: 14px;
   // top: 34px;
@@ -26,13 +26,13 @@
   bottom: 0;
   right: 0;
   }
-  
+
 .footerText{
     font-size: x-small;
     color: white;
     text-align: center;
   }
- 
+
 .buttonstyle{
   margin-top: 1%;
   margin-left: 587px;
@@ -298,3 +298,20 @@ p
 }
 
 
+.footer {
+  height: 13px;
+  background: #2e1d1efa 0% 0% no-repeat padding-box;
+  opacity: 100%;
+  position: fixed;
+  left: -16px;
+  bottom: -1px;
+  width: 1369px;
+}
+
+.footerText {
+  font-size: x-small;
+  text-align: center;
+  color: white;
+  margin-top: 0px;
+  margin-left: -67px;
+}

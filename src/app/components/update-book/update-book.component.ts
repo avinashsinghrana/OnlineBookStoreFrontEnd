@@ -81,6 +81,7 @@ export class UpdateBookComponent implements OnInit {
       (data) => {
         console.log('book data response ', data);
         this.messageService.changeMessage();
+        this.snackBar.open('Book Updated Successfully and  Apply for Approval', 'ok', {duration: 2000});
       },
       (error) => {
         this.snackBar.open('Failed to update', 'cancel', {

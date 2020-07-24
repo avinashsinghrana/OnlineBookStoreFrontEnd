@@ -52,7 +52,7 @@
     <mat-menu id="profile" #menu1="matMenu" class="menu-button" fxLayout="row" fxLayoutAlign="end start">
       <div class="backgroundimage">
         <button (click)="$event.stopPropagation()"
-                [ngStyle]="{'background-image':'url(' +img+ ')',positionAlign: 'center', 'background-size':'cover','width':'85px','height':'85px', marginBottom:'10px'}"
+                [ngStyle]="{'background-image':'url(' +img+ ')',positionAlign: 'center', 'background-size':'cover','width':'85px','height':'85px', marginBottom:'10px','margin-left':'6px','box-shadow': 'none'}"
                 (click)="imageSelectFile.click()" matTooltip="{{username}}" mat-mini-fab class="imageSelect">
           <mat-icon class="icons" matSuffix>add_a_photo</mat-icon>
         </button>

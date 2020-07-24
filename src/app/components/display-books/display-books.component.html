@@ -11,7 +11,7 @@
   fxLayout.lg="row wrap"
   fxLayoutAlign.lg="start start"
 >
-  <div *ngFor="let book of books  | bookFilter:searchTerm | paginate: { itemsPerPage: 8, currentPage: page, id: 'first' } " style="margin: 0px; " fxLayout="row" >
+  <div *ngFor="let book of books  | bookFilter:searchTerm | paginate: { itemsPerPage: 4, currentPage: page, id: 'first' } " style="margin: 0px; " fxLayout="row" >
     <mat-card>
 
      <div class="bookImageDiv" fxLayoutAlign="center">
@@ -98,21 +98,30 @@
           text-align: center;
           opacity: 90%;
         ">
-            DISAPPROVED
+            Disapproved
           </div>
         </div>
+<!--        height: 32px;-->
+<!--        width: 100%;-->
+<!--        margin-top: -250px;-->
+<!--        background-color: darkgreen;-->
+<!--        border-radius: 2px;-->
+<!--        color:white;-->
+<!--        text-align: center;-->
+<!--        opacity: 90%;-->
         <div *ngIf="book.verfied === true">
           <div style="
-          height: 32px;
-          width: 100%;
-          margin-top: -250px;
+          height: 26px;
+          width: 88%;
+          margin-top: -118px;
           background-color: darkgreen;
-          border-radius: 2px;
-          color:white;
+          border-radius: 1px;
+          color: white;
           text-align: center;
-          opacity: 90%;
+          opacity: 100%;
+          margin-left: 10px;
         ">
-            VERIFIED
+            Verified
           </div>
         </div>
       </div>
@@ -120,7 +129,7 @@
   </div>
 </div>
 <div class="paginator">
-  <pagination-controls
+  <pagination-controls align="center"
     (pageChange)="page = $event"
     id="first"
   ></pagination-controls>

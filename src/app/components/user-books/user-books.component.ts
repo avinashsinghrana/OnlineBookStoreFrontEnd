@@ -169,4 +169,13 @@ export class UserBooksComponent implements OnInit {
     }
     return key;
   }
+
+  checkActual(book: any): any {
+    let result = true;
+    if (book.equals(0)){
+      result = true;
+    }
+    else { result = false; }
+    return  result;
+  }
 }

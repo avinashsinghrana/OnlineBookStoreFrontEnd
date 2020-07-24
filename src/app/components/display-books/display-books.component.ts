@@ -68,6 +68,7 @@ export class DisplayBooksComponent implements OnInit {
       (data) => {
         this.messageService.changeMessage();
         location.reload();
+        this.snackBar.open('Book Deleted Successfully', 'ok', {duration: 2000});
       },
       (error: any) => {
         this.snackBar.open('Book Deletion Failed', 'ok', {duration: 2000});
@@ -79,6 +80,7 @@ export class DisplayBooksComponent implements OnInit {
     this.vendorService.applyForApproval(bookId).subscribe(response => {
       console.log('requested for approval', response);
       location.reload();
+      this.snackBar.open('Requested for Approval', 'Ok', {duration: 2000});
     });
   }
 }

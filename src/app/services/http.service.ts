@@ -76,7 +76,7 @@ export class HttpService {
         // 'Content-Type': 'multipart/form-data'
       })
     };
-    return this.http.post(url, body, httpOptions);
+    return this.http.post(url, body, {headers: new HttpHeaders().set('token', localStorage.getItem('token'))});
   }
 
   public POST(url: any, data: any, token): any {

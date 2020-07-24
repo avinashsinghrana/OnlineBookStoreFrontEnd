@@ -164,7 +164,7 @@ mat-card {
     width: 100%;
     padding-left: 10%;
     padding-right: 10%;
-    padding-bottom: 2%;
+    padding-bottom: 0%;
   }
   // @media only screen and (min-width: 600px) and (max-width: 1300) {
   //   .main-div {
@@ -238,3 +238,13 @@ mat-card {
       width: 100%;
     }
   }
+.paginator{
+  display: flex;
+  // width: 2%;
+  align-content: center;
+  align-items: center;
+  font-size: 68%;
+  margin-left: -50px;
+  margin-top: -53px;
+  // margin-top: 20px;
+}

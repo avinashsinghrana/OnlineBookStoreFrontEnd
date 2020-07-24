@@ -250,3 +250,13 @@ mat-card {
   border: none;
   outline: none;
 }
+.paginator{
+  display: flex;
+  // width: 2%;
+  align-content: center;
+  align-items: center;
+  font-size: 68%;
+  margin-left: -50px;
+  margin-top: 72px;
+  // margin-top: 20px;
+}

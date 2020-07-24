@@ -55,6 +55,12 @@ export class UserService {
   /*profilePic(body: any) {
     return this.service.upload(environment.addimg, body);
   }*/
+  setprofilePic(file: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post('http://localhost:8081/user/addImg', formData, {headers: new HttpHeaders().set('token', localStorage.getItem('token'))});
+
+  }
   profilePic(body: any) {
     return this.service.upload(environment.profilePicPath, body);
   }

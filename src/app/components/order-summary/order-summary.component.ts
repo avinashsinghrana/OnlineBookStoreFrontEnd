@@ -39,7 +39,7 @@ export class OrderSummaryComponent implements OnInit {
       locality: ['', [Validators.required, Validators.pattern('([A-Z]?[a-zA-Z\\s0-9]+){2,}')]],
       pinCode: ['', [Validators.required, Validators.pattern('[1-9][0-9]{5}')]],
       address: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9\\s\,\-\.()]{30,}')]],
-      city: ['', [Validators.required, Validators.pattern('[A-Z]?[a-z]{3,}')]],
+      city: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,}')]],
       landMark: ['', [Validators.required, Validators.pattern('^[A-Z]?[a-z\\s]{5,}')]],
       locationType : this.radioresponse,
     });
@@ -61,9 +61,16 @@ export class OrderSummaryComponent implements OnInit {
     });
     // }
   }
+  totalCostOfBook(): any{
+    let  GrandTotal = 0;
+    for (let index = 0; index < this.size; index++) {
+      GrandTotal += this.books[index].price;
+    }
+    return GrandTotal;
+  }
 
   onPopup() {
-    if (localStorage.getItem('token') == null) {
+    if (localStorage.getItem('token') == null || localStorage.getItem('token') != null && localStorage.getItem('roleType') !== 'USER') {
       this.dialog.open(LoginComponent, {
         width: '28%',
         height: 'auto'
@@ -73,18 +80,16 @@ export class OrderSummaryComponent implements OnInit {
     this.popDown = true;
   }
 
-  increaseQuantity(bookId: any, i: number): any {
-    this.books[i].quantity++;
-    this.cartService.addBooks(bookId, localStorage.getItem('token')).subscribe((response: any) => {
+  increaseQuantity(book: any): any {
+    this.cartService.addBooks(book.bookId, localStorage.getItem('token')).subscribe((response: any) => {
       console.log('response', response);
       this.getAllBookCart();
     });
   }
 
-  decreaseQuantity(bookId: any, i: number): any {
-    this.books[i].quantity--;
-    if (this.books[i].quantity > 0) {
-      this.cartService.removeItem(bookId, localStorage.getItem('token')).subscribe((response: any) => {
+  decreaseQuantity(book: any): any {
+    if (book.quantity > 0) {
+      this.cartService.removeItem(book.bookId, localStorage.getItem('token')).subscribe((response: any) => {
         console.log('response=', response);
         this.getAllBookCart();
       });
